@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <title>Very Slow Local Business Demo</title>
+
+  <!-- Render-blocking CSS like heavy WordPress/Elementor sites -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Blocking scripts before page content -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+  <script>
+    const start = Date.now();
+    while (Date.now() - start < 15000) {}
+  </script>
+
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    .cookie-banner {
+      background: white;
+      padding: 30px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99999;
+      box-shadow: 0 0 20px #999;
+    }
+    .chat-widget {
+      position: fixed;
+      bottom: 120px;
+      right: 20px;
+      background: green;
+      color: white;
+      padding: 20px;
+      border-radius: 50px;
+      z-index: 99999;
+      font-size: 20px;
+    }
+    .section {
+      padding: 40px;
+      border-bottom: 1px solid #ddd;
+    }
+    img {
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cookie-banner">
+    This website uses cookies to improve your experience.
+    <button>Accept</button>
+  </div>
+
+  <div class="chat-widget">
+    WhatsApp Chat
+  </div>
+
+  <h1>Local Business</h1>
+  <p>Emergency local services with a very slow website.</p>
+
+  <!-- Heavy above-the-fold images -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?one">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?two">
+
+  <script>
+    // Create lots of Elementor-style nested DOM
+    for (let i = 0; i < 400; i++) {
+      const section = document.createElement("div");
+      section.className = "section";
+
+      section.innerHTML = `
+        <div class="elementor-section">
+          <div class="elementor-container">
+            <div class="elementor-column">
+              <div class="elementor-widget-wrap">
+                <div class="elementor-widget">
+                  <h2>Service Section ${i}</h2>
+                  <p>This is a heavy nested page-builder style section.</p>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-phone"></i>
+                  <i class="fa fa-map-marker"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(section);
+    }
+  </script>
+
+  <script>
+    setTimeout(() => {
+      const banner = document.createElement("div");
+      banner.innerText = "Late loading promotional banner causing layout shift";
+      banner.style.fontSize = "70px";
+      banner.style.padding = "100px";
+      banner.style.background = "yellow";
+      document.body.prepend(banner);
+    }, 2000);
+  </script>
+
+</body>
+</html>
