@@ -27,6 +27,16 @@
       color: #222;
     }
 
+    #promo-banner {
+  min-height: 180px;
+  background: #ffea00;
+  color: #111;
+  font-size: 46px;
+  font-weight: bold;
+  padding: 70px;
+  box-sizing: border-box;
+}
+
     .top-bar {
       background: #1f3d2b;
       color: white;
@@ -197,7 +207,9 @@
 </head>
 
 <body>
-
+<div id="promo-banner">
+  Special offer: same-day local callouts available
+</div>
   <div class="top-bar">
     <span>Family-run local trade specialists</span>
     <span>Call today: 020 0000 0000</span>
@@ -291,19 +303,6 @@
     This website uses cookies to improve your experience.
     <button>Accept</button>
   </div>
-
-  <!-- Late layout shift -->
-  <script>
-    setTimeout(() => {
-      const banner = document.createElement("div");
-      banner.innerText = "Special offer: same-day local callouts available";
-      banner.style.fontSize = "46px";
-      banner.style.padding = "70px";
-      banner.style.background = "#ffea00";
-      banner.style.color = "#111";
-      document.body.prepend(banner);
-    }, 2000);
-  </script>
 
   <!-- Elementor/Wix-style DOM bloat -->
   <script>
