@@ -1,112 +1,330 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <title>Very Slow Local Business Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slow Local Business Demo</title>
 
-  <!-- Render-blocking CSS like heavy WordPress/Elementor sites -->
+  <!-- Heavy render-blocking CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-  <!-- Blocking scripts before page content -->
+  <!-- Heavy plugin-style scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
+  <!-- Controlled blocking: bad, but still measurable -->
   <script>
-   const start = Date.now();
-while (Date.now() - start < 4000) {}
+    const start = Date.now();
+    while (Date.now() - start < 4000) {}
   </script>
 
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f3ed;
+      color: #222;
+    }
+
+    .top-bar {
+      background: #1f3d2b;
+      color: white;
+      padding: 10px 40px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    header {
+      background: white;
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1f3d2b;
+    }
+
+    nav a {
+      margin-left: 24px;
+      color: #222;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      min-height: 620px;
+      background: white;
+    }
+
+    .hero-text {
+      padding: 80px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-text h1 {
+      font-size: 58px;
+      line-height: 1;
+      margin: 0 0 24px;
+      color: #1f3d2b;
+    }
+
+    .hero-text p {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .buttons a {
+      display: inline-block;
+      padding: 16px 24px;
+      margin-right: 12px;
+      background: #dca94f;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .buttons a.secondary {
+      background: #1f3d2b;
+      color: white;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section {
+      padding: 70px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 42px;
+      color: #1f3d2b;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      padding: 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      min-height: 220px;
+    }
+
+    .card i {
+      font-size: 32px;
+      color: #dca94f;
+      margin-bottom: 16px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .split img {
+      width: 100%;
+    }
+
+    .reviews {
+      background: #1f3d2b;
+      color: white;
+    }
+
+    .review {
+      background: rgba(255,255,255,0.1);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
     .cookie-banner {
       background: white;
-      padding: 30px;
+      padding: 24px;
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: 99999;
-      box-shadow: 0 0 20px #999;
+      box-shadow: 0 0 20px rgba(0,0,0,0.25);
     }
+
     .chat-widget {
       position: fixed;
-      bottom: 120px;
-      right: 20px;
-      background: green;
+      bottom: 110px;
+      right: 24px;
+      background: #078c39;
       color: white;
-      padding: 20px;
-      border-radius: 50px;
+      padding: 18px 24px;
+      border-radius: 40px;
       z-index: 99999;
-      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
     }
-    .section {
+
+    footer {
+      background: #111;
+      color: white;
       padding: 40px;
-      border-bottom: 1px solid #ddd;
-    }
-    img {
-      width: 100%;
-      display: block;
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="cookie-banner">
-    This website uses cookies to improve your experience.
-    <button>Accept</button>
+  <div class="top-bar">
+    <span>Family-run local trade specialists</span>
+    <span>Call today: 020 0000 0000</span>
   </div>
+
+  <header>
+    <div class="logo">Barkers Local Services</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Reviews</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Reliable Local Repairs & Home Services</h1>
+      <p>
+        Trusted local specialists for home repairs, fittings, maintenance,
+        installations and emergency callouts.
+      </p>
+      <div class="buttons">
+        <a href="#">Book a Visit</a>
+        <a href="#" class="secondary">Call Now</a>
+      </div>
+    </div>
+
+    <!-- Intentionally huge hero image to hurt LCP -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg" alt="Local business hero image">
+  </section>
+
+  <section class="section">
+    <h2>Our Services</h2>
+    <div class="cards">
+      <div class="card">
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+        <h3>Home Repairs</h3>
+        <p>General repairs, fixtures, fittings and small jobs around the home.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-house"></i>
+        <h3>Property Maintenance</h3>
+        <p>Reliable support for landlords, homeowners and local businesses.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-bolt"></i>
+        <h3>Emergency Callouts</h3>
+        <p>Fast response for urgent issues when your home or business needs help.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section split">
+    <div>
+      <h2>Serving the local community for years</h2>
+      <p>
+        We provide practical, friendly and dependable local services. Our team
+        handles everything from minor repairs to larger maintenance work.
+      </p>
+      <p>
+        This demo intentionally behaves like a slow local business site so it can
+        be improved later by Reload Works.
+      </p>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?second" alt="Large service image">
+  </section>
+
+  <section class="section reviews">
+    <h2>What customers say</h2>
+    <div class="review">“Helpful, friendly and reliable. Would recommend.”</div>
+    <div class="review">“Quick response and professional service.”</div>
+    <div class="review">“Sorted the issue the same day.”</div>
+  </section>
+
+  <section class="section">
+    <h2>Contact us</h2>
+    <p>Email: hello@example.com</p>
+    <p>Phone: 020 0000 0000</p>
+  </section>
+
+  <footer>
+    Slow demo website created for Reload Works performance testing.
+  </footer>
 
   <div class="chat-widget">
     WhatsApp Chat
   </div>
 
- <h1>THIS IS THE NEW VERSION</h1>
-  <p>Emergency local services with a very slow website.</p>
+  <div class="cookie-banner">
+    This website uses cookies to improve your experience.
+    <button>Accept</button>
+  </div>
 
-  <!-- Heavy above-the-fold images -->
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?one">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?two">
-
+  <!-- Late layout shift -->
   <script>
-    // Create lots of Elementor-style nested DOM
-    for (let i = 0; i < 400; i++) {
-      const section = document.createElement("div");
-      section.className = "section";
+    setTimeout(() => {
+      const banner = document.createElement("div");
+      banner.innerText = "Special offer: same-day local callouts available";
+      banner.style.fontSize = "46px";
+      banner.style.padding = "70px";
+      banner.style.background = "#ffea00";
+      banner.style.color = "#111";
+      document.body.prepend(banner);
+    }, 2000);
+  </script>
 
-      section.innerHTML = `
-        <div class="elementor-section">
-          <div class="elementor-container">
-            <div class="elementor-column">
-              <div class="elementor-widget-wrap">
-                <div class="elementor-widget">
-                  <h2>Service Section ${i}</h2>
-                  <p>This is a heavy nested page-builder style section.</p>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-phone"></i>
-                  <i class="fa fa-map-marker"></i>
+  <!-- Elementor/Wix-style DOM bloat -->
+  <script>
+    for (let i = 0; i < 350; i++) {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <div class="builder-section">
+          <div class="builder-container">
+            <div class="builder-row">
+              <div class="builder-column">
+                <div class="builder-widget">
+                  <span></span><span></span><span></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       `;
-
-      document.body.appendChild(section);
+      document.body.appendChild(div);
     }
-  </script>
-
-  <script>
-    setTimeout(() => {
-      const banner = document.createElement("div");
-      banner.innerText = "Late loading promotional banner causing layout shift";
-      banner.style.fontSize = "70px";
-      banner.style.padding = "100px";
-      banner.style.background = "yellow";
-      document.body.prepend(banner);
-    }, 2000);
   </script>
 
 </body>
