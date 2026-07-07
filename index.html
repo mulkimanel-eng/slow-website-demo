@@ -248,7 +248,10 @@
     </div>
 
     <!-- Intentionally huge hero image to hurt LCP -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg" alt="Local business hero image">
+   <!-- Hero image intentionally removed and added late by JavaScript -->
+<div style="min-height: 500px; background:#ddd;">
+  Loading main image...
+</div>
   </section>
 
   <section class="section">
@@ -335,6 +338,81 @@
       document.body.appendChild(div);
     }
   </script>
+
+<!-- Scenario 1: Slow LCP image added late -->
+<script>
+  setTimeout(() => {
+    const hero = document.querySelector(".hero");
+    const img = document.createElement("img");
+    img.src = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?slow-lcp=" + Date.now();
+    img.alt = "Late loading large hero image";
+    img.style.width = "100%";
+    img.style.height = "900px";
+    img.style.objectFit = "cover";
+    hero.appendChild(img);
+  }, 4500);
+</script>
+
+<!-- Scenario 2: Layout shift -->
+<script>
+  setTimeout(() => {
+    const shiftBanner = document.createElement("div");
+    shiftBanner.innerText = "Emergency same-day appointments available";
+    shiftBanner.style.background = "#ffea00";
+    shiftBanner.style.fontSize = "52px";
+    shiftBanner.style.fontWeight = "bold";
+    shiftBanner.style.padding = "90px";
+    document.body.prepend(shiftBanner);
+  }, 2500);
+</script>
+
+<!-- Scenario 3: Heavy JavaScript / main-thread work -->
+<script>
+  setTimeout(() => {
+    const start = Date.now();
+    while (Date.now() - start < 3000) {
+      Math.random() * Math.random();
+    }
+  }, 1200);
+</script>
+
+<!-- Scenario 4: Page-builder DOM bloat -->
+<script>
+  for (let i = 0; i < 2500; i++) {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = `
+      <div class="elementor-section">
+        <div class="elementor-container">
+          <div class="elementor-row">
+            <div class="elementor-column">
+              <div class="elementor-widget">
+                <span>Unused builder element</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(wrapper);
+  }
+</script>
+
+<!-- Scenario 5: Third-party embeds/widgets -->
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3"
+  width="100%"
+  height="450"
+  style="border:0;"
+  loading="eager">
+</iframe>
+
+<iframe
+  width="100%"
+  height="315"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  title="Demo video"
+  loading="eager">
+</iframe>
 
 </body>
 </html>
