@@ -317,7 +317,9 @@
     This website uses cookies to improve your experience.
     <button>Accept</button>
   </div>
-
+  
+<!-- Hidden builder cache -->
+<div id="builder-cache" hidden></div>
   <!-- Elementor/Wix-style DOM bloat -->
   <script>
     for (let i = 0; i < 350; i++) {
@@ -378,23 +380,31 @@
 
 <!-- Scenario 4: Page-builder DOM bloat -->
 <script>
-  for (let i = 0; i < 2500; i++) {
+const builderCache = document.getElementById("builder-cache");
+
+for (let i = 0; i < 2500; i++) {
+
     const wrapper = document.createElement("div");
+
     wrapper.innerHTML = `
-      <div class="elementor-section">
-        <div class="elementor-container">
-          <div class="elementor-row">
-            <div class="elementor-column">
-              <div class="elementor-widget">
-                <span>Unused builder element</span>
-              </div>
+        <div class="elementor-section">
+            <div class="elementor-container">
+                <div class="elementor-row">
+                    <div class="elementor-column">
+                        <div class="elementor-widget">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     `;
-    document.body.appendChild(wrapper);
-  }
+
+    builderCache.appendChild(wrapper);
+
+}
 </script>
 
 <!-- Scenario 5: Third-party embeds/widgets -->
