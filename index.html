@@ -348,15 +348,6 @@
 
 
 
-<!-- Scenario 3: Heavy JavaScript / main-thread work -->
-<script>
-  setTimeout(() => {
-    const start = Date.now();
-    while (Date.now() - start < 3000) {
-      Math.random() * Math.random();
-    }
-  }, 1200);
-</script>
 
 <!-- Scenario 4: Page-builder DOM bloat -->
 <script>
