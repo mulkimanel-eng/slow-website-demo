@@ -247,10 +247,14 @@
       </div>
     </div>
 
-    <!-- Intentionally huge hero image to hurt LCP -->
-   <!-- Hero image intentionally removed and added late by JavaScript -->
-<div style="min-height: 500px; background:#ddd;">
-  Loading main image...
+   <img
+    class="hero-image"
+    src="images/hero.webp"
+    width="1200"
+    height="800"
+    alt="Local tradesperson completing a home repair"
+    fetchpriority="high"
+  >
 </div>
   </section>
 
@@ -341,19 +345,6 @@
     }
   </script>
 
-<!-- Scenario 1: Slow LCP image added late -->
-<script>
-  setTimeout(() => {
-    const hero = document.querySelector(".hero");
-    const img = document.createElement("img");
-    img.src = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg?slow-lcp=" + Date.now();
-    img.alt = "Late loading large hero image";
-    img.style.width = "100%";
-    img.style.height = "900px";
-    img.style.objectFit = "cover";
-    hero.appendChild(img);
-  }, 4500);
-</script>
 
 <!-- Scenario 2: Layout shift -->
 <script>
