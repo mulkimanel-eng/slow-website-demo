@@ -346,18 +346,7 @@
   </script>
 
 
-<!-- Scenario 2: Layout shift -->
-<script>
-  setTimeout(() => {
-    const shiftBanner = document.createElement("div");
-    shiftBanner.innerText = "Emergency same-day appointments available";
-    shiftBanner.style.background = "#ffea00";
-    shiftBanner.style.fontSize = "52px";
-    shiftBanner.style.fontWeight = "bold";
-    shiftBanner.style.padding = "90px";
-    document.body.prepend(shiftBanner);
-  }, 2500);
-</script>
+
 
 <!-- Scenario 3: Heavy JavaScript / main-thread work -->
 <script>
@@ -417,3 +406,4 @@ for (let i = 0; i < 2500; i++) {
 
 </body>
 </html>
+
