@@ -1,0 +1,1078 @@
+<!doctype html>
+<!--
+  DELIBERATELY SLOW VERSION. Do not optimise this file.
+  It exists to record the "before" clip: oversized uncompressed hero,
+  render-blocking third-party CSS and JS, eager third-party embeds and
+  blocking main-thread work. The optimised page is at ../index.html.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B6E4F">
+  <meta name="description" content="Trusted local UK trades &amp; home services. Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.">
+  <title>Family Run Local Services | Trusted UK Trades &amp; Home Repairs</title>
+  <link rel="canonical" href="https://mulkimanel-eng.github.io/slow-website-demo/">
+  <!-- No hero preload. The LCP image is discovered late, after the parser
+       has finished fetching and executing everything below. -->
+
+  <!-- Render-blocking third-party stylesheets -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=block">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Render-blocking libraries: no defer, no async, loaded before any markup -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Family Run Local Services | Trusted UK Trades &amp; Home Repairs">
+  <meta property="og:description" content="Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.">
+  <meta property="og:image" content="images/hero.webp">
+
+  <style>
+    /* ============================================================
+       Design tokens - refreshed identity
+       Emerald + neutral off-white. Amber is an accent only,
+       never a large surface. No gradients on primary controls.
+       ============================================================ */
+    :root {
+      /* Brand */
+      --brand:        #0B6E4F;
+      --brand-deep:   #07553D;
+      --brand-ink:    #0C1F19;
+      --brand-tint:   #EDF4F1;
+      --brand-tint-2: #DCEAE4;
+
+      /* Accent - used sparingly (ratings, eyebrow marks, one CTA) */
+      --accent:       #E4A11B;
+      --star:         #9A6100;   /* accessible gold for star glyphs on light surfaces */
+      --accent-ink:   #241804;
+
+      /* Neutrals */
+      --ink:          #101A16;
+      --muted:        #55635C;
+      --canvas:       #F6F7F6;
+      --surface:      #FFFFFF;
+      --line:         rgba(16, 26, 22, 0.11);
+      --line-strong:  rgba(16, 26, 22, 0.18);
+      --on-dark:      #E7EEEA;
+      --on-dark-mute: #A9BBB3;
+
+      /* Shape + depth (restrained) */
+      --r-sm: 10px;
+      --r:    14px;
+      --r-lg: 22px;
+      --shadow-xs: 0 1px 2px rgba(16, 26, 22, 0.05);
+      --shadow-sm: 0 2px 6px rgba(16, 26, 22, 0.06);
+      --shadow-md: 0 10px 28px rgba(16, 26, 22, 0.09);
+
+      --container: 1140px;
+      --gutter: 24px;
+
+      /* Fluid type scale */
+      --fs-display: clamp(2.25rem, 1.55rem + 2.7vw, 3.4rem);
+      --fs-h2:      clamp(1.7rem, 1.25rem + 1.8vw, 2.55rem);
+      --fs-h3:      clamp(1.1rem, 1.02rem + 0.35vw, 1.28rem);
+      --fs-lead:    clamp(1.03rem, 0.98rem + 0.3vw, 1.19rem);
+      --fs-body:    1rem;
+      --fs-sm:      0.9rem;
+      --fs-xs:      0.79rem;
+    }
+
+    /* ---------- Reset / base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: var(--fs-body);
+      line-height: 1.62;
+      color: var(--ink);
+      background: var(--canvas);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    h1, h2, h3 {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.14;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+    h1 { font-size: var(--fs-display); line-height: 1.04; letter-spacing: -0.035em; }
+    h2 { font-size: var(--fs-h2); }
+    h3 { font-size: var(--fs-h3); letter-spacing: -0.015em; }
+    p  { margin: 0; }
+
+    ul { margin: 0; padding: 0; list-style: none; }
+
+    :focus-visible {
+      outline: 3px solid var(--brand);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .measure { max-width: 60ch; }
+
+    /* ---------- Eyebrow ---------- */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .eyebrow.on-dark { color: var(--accent); }
+
+    /* ---------- Buttons: flat, solid, no gloss ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 50px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: var(--r-sm);
+      font: inherit;
+      font-size: 0.97rem;
+      font-weight: 650;
+      letter-spacing: -0.005em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:hover { background: var(--brand-deep); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--brand-deep);
+      border-color: var(--line-strong);
+    }
+    .btn-outline:hover { border-color: var(--brand); background: var(--brand-tint); transform: translateY(-1px); }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--accent-ink);
+    }
+    .btn-accent:hover { background: #f0ad25; transform: translateY(-1px); }
+
+    .btn:active { transform: translateY(0); }
+    .btn-block { width: 100%; }
+
+    /* ---------- Demo notice ---------- */
+    .demo-flag {
+      background: #FBEFD6;
+      color: #3A2A08;
+      border-bottom: 1px solid #E9D5A8;
+      text-align: center;
+      padding: 10px var(--gutter);
+      font-size: var(--fs-sm);
+      line-height: 1.45;
+    }
+    .demo-flag strong {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .demo-chip {
+      flex: none;
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: #6B4A05;
+      background: #FBEFD6;
+      border: 1px solid #E9D5A8;
+      border-radius: 999px;
+      padding: 3px 8px;
+    }
+
+    /* ---------- Promo bar ---------- */
+    .promo {
+      background: var(--brand-ink);
+      color: var(--on-dark);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.02em;
+      text-align: center;
+      padding: 9px var(--gutter);
+    }
+    .promo strong { color: #fff; font-weight: 650; }
+    .promo .sep { color: var(--on-dark-mute); padding: 0 10px; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: saturate(1.4) blur(10px);
+      -webkit-backdrop-filter: saturate(1.4) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      flex: none;
+    }
+    .logo small {
+      display: block;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      display: inline-block;
+      padding: 11px 13px;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      font-weight: 550;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .15s ease, background-color .15s ease;
+    }
+    .nav-links a:hover { color: var(--brand-deep); background: var(--brand-tint); }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-cta { min-height: 44px; padding: 0 18px; font-size: 0.92rem; }
+
+    .nav-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      display: block;
+      width: 19px;
+      height: 2px;
+      margin-inline: auto;
+      background: var(--ink);
+      border-radius: 2px;
+      content: "";
+    }
+    .nav-toggle span::before { transform: translateY(-6px); }
+    .nav-toggle span::after  { transform: translateY(4px); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: clamp(44px, 5vw, 84px) 0 clamp(32px, 3vw, 48px); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: clamp(28px, 4vw, 60px);
+      align-items: center;
+    }
+    .hero-lead {
+      font-size: var(--fs-lead);
+      color: var(--muted);
+      margin-top: 18px;
+      max-width: 52ch;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .trust-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+      margin-top: 26px;
+      font-size: var(--fs-sm);
+      color: var(--muted);
+    }
+    .trust-points li { display: inline-flex; align-items: center; gap: 8px; }
+
+    .tick {
+      display: grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--brand-tint-2);
+      color: var(--brand-deep);
+      font-size: 10px;
+      font-weight: 700;
+      flex: none;
+    }
+
+    .hero-media { position: relative; }
+    .hero-media img {
+      /* No aspect-ratio and no width/height attributes, so nothing is
+         reserved for the image and the page jumps when it finally arrives. */
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+    }
+    .hero-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-badge .stars {
+      display: block;
+      color: var(--star);
+      font-size: 0.86rem;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .hero-badge .score { font-size: 1.06rem; font-weight: 700; letter-spacing: -0.02em; }
+    .hero-badge span.label { display: block; font-size: var(--fs-xs); color: var(--muted); }
+
+    /* ---------- Trust bar: hairline rule, no card ---------- */
+    .trust-bar {
+      margin-top: clamp(36px, 4vw, 56px);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .trust-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat {
+      padding: 24px 20px;
+      text-align: center;
+      border-left: 1px solid var(--line);
+    }
+    .stat:first-child { border-left: 0; }
+    .stat strong {
+      display: block;
+      font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.72rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--brand-deep);
+    }
+    .stat span { font-size: var(--fs-sm); color: var(--muted); }
+
+    /* ---------- Sections ---------- */
+    .section { padding: clamp(56px, 6.5vw, 96px) 0; }
+    .section-head { margin-bottom: clamp(28px, 3.5vw, 44px); max-width: 62ch; }
+    .section-head p { color: var(--muted); margin-top: 12px; font-size: var(--fs-lead); }
+    .section-head.center { margin-inline: auto; text-align: center; }
+    .section-head.center .eyebrow { justify-content: center; }
+
+    /* ---------- Service cards ---------- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 28px 26px 30px;
+      box-shadow: var(--shadow-xs);
+      transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover { border-color: var(--brand-tint-2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--brand-tint);
+      color: var(--brand-deep);
+      margin-bottom: 18px;
+    }
+    .card-icon svg { width: 22px; height: 22px; }
+    .card h3 { margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: var(--fs-sm); }
+
+    /* ---------- About + credentials panel ---------- */
+    .about { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 4.5vw, 64px);
+      align-items: center;
+    }
+    .about p { color: var(--muted); margin-top: 14px; }
+    .about-list { margin-top: 22px; display: grid; gap: 11px; }
+    .about-list li { display: flex; gap: 10px; align-items: flex-start; font-size: var(--fs-sm); color: var(--ink); }
+
+    .panel {
+      background: var(--brand-tint);
+      border: 1px solid var(--brand-tint-2);
+      border-radius: var(--r-lg);
+      padding: 26px;
+    }
+    .panel-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--brand-tint-2);
+    }
+    .panel-head .big {
+      font-size: clamp(2rem, 1.6rem + 1.4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      color: var(--brand-deep);
+      line-height: 1;
+    }
+    .panel-head .caption { font-size: var(--fs-sm); color: var(--muted); text-align: right; }
+    .panel-head .stars { color: var(--star); letter-spacing: 2px; }
+
+    .panel-rows { margin-top: 6px; }
+    .panel-rows div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--brand-tint-2);
+      font-size: var(--fs-sm);
+    }
+    .panel-rows div:last-child { border-bottom: 0; padding-bottom: 0; }
+    .panel-rows dt, .panel-rows .k { color: var(--muted); }
+    .panel-rows dd, .panel-rows .v { margin: 0; font-weight: 650; color: var(--brand-ink); }
+
+    .embeds { display: grid; gap: 16px; margin-bottom: 24px; }
+    .embeds iframe { width: 100%; height: 260px; border: 0; border-radius: var(--r); }
+
+    /* ---------- Reviews (light tinted band) ---------- */
+    .reviews { background: var(--brand-tint); }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .review {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 26px;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .review .stars { color: var(--star); letter-spacing: 2px; font-size: 0.92rem; }
+    .review p { color: var(--ink); font-size: var(--fs-sm); }
+    .review .who {
+      margin: 0;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-weight: 650;
+      font-size: var(--fs-sm);
+    }
+    .review .who span { display: block; font-weight: 400; font-size: var(--fs-xs); color: var(--muted); }
+
+    /* ---------- Quote / CTA (the one dark section) ---------- */
+    .quote { padding: clamp(56px, 6.5vw, 96px) 0; }
+    .quote-inner {
+      background: var(--brand-ink);
+      color: var(--on-dark);
+      border-radius: var(--r-lg);
+      padding: clamp(30px, 4vw, 54px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 4vw, 52px);
+      align-items: center;
+    }
+    .quote-inner h2 { color: #fff; }
+    .quote-inner p { color: var(--on-dark-mute); margin-top: 14px; max-width: 44ch; }
+    .quote-inner p strong { color: #fff; }
+    .quote-inner a { color: var(--accent); }
+
+    .quote-form {
+      background: var(--surface);
+      border-radius: var(--r);
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .field label {
+      display: block;
+      font-size: var(--fs-xs);
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 14px;
+      font: inherit;
+      font-size: 0.97rem;
+      color: var(--ink);
+      background: var(--canvas);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-sm);
+      transition: border-color .15s ease, background-color .15s ease;
+    }
+    .field input::placeholder { color: #7d8a84; }
+    .field input:hover { border-color: var(--brand); }
+    .field input:focus { background: var(--surface); }
+    .quote-form .form-note { font-size: var(--fs-xs); color: var(--muted); text-align: center; margin-top: 2px; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      background: var(--brand-ink);
+      color: var(--on-dark-mute);
+      padding: clamp(44px, 5vw, 68px) 0 26px;
+      font-size: var(--fs-sm);
+    }
+    .site-footer .logo { color: #fff; }
+    .site-footer .logo small { color: var(--on-dark-mute); }
+    .site-footer .logo-mark { background: var(--brand); }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: clamp(28px, 4vw, 56px);
+    }
+    .footer-brand p { margin-top: 16px; max-width: 40ch; }
+    .site-footer h3 {
+      color: #fff;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .site-footer nav a {
+      display: inline-block;
+      padding: 9px 0;
+      min-height: 40px;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      transition: color .15s ease;
+    }
+    .site-footer nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-bottom {
+      margin-top: clamp(32px, 4vw, 48px);
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      justify-content: space-between;
+      font-size: var(--fs-xs);
+    }
+
+    /* ---------- Cookie notice (fixed: cannot shift layout) ---------- */
+    .cookie {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 60;
+      margin-inline: auto;
+      max-width: 560px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-md);
+      font-size: var(--fs-sm);
+    }
+    .cookie[hidden] { display: none; }
+    .cookie .btn { min-height: 44px; padding: 0 20px; font-size: 0.9rem; }
+
+    /* ============================================================
+       Responsive
+       ============================================================ */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-media { order: -1; }
+      .split { grid-template-columns: 1fr; }
+      .quote-inner { grid-template-columns: 1fr; }
+      .cards, .review-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 780px) {
+      :root { --gutter: 18px; }
+
+      .nav-toggle { display: block; }
+      .nav-desktop-cta { display: none; }
+      .nav-links {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        padding: 10px var(--gutter) 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow-md);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 12px; font-size: 1rem; }
+      .site-header .container { position: relative; }
+
+      .trust-bar-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(odd) { border-left: 0; }
+      .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+
+      .cards, .review-grid { grid-template-columns: 1fr; }
+      .hero-cta .btn { flex: 1 1 auto; }
+    }
+
+    @media (max-width: 520px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-badge { left: 12px; bottom: 12px; padding: 9px 12px; }
+      .logo small { display: none; }
+      .logo { font-size: 0.88rem; }
+      .logo-mark { width: 34px; height: 34px; border-radius: 10px; font-size: 0.74rem; }
+      .promo .sep { display: none; }
+      .promo .promo-tail { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    Blocking work before any content is parsed. A page-builder style DOM
+    is generated synchronously, so the browser cannot paint until it finishes.
+  -->
+  <script>
+    (function () {
+      var host = document.createElement('div');
+      host.setAttribute('aria-hidden', 'true');
+      host.style.display = 'none';
+      for (var i = 0; i < 9000; i++) {
+        var row = document.createElement('div');
+        row.className = 'builder-row builder-row-' + i;
+        var inner = document.createElement('span');
+        inner.textContent = 'block ' + i + ' ' + (typeof moment !== 'undefined' ? moment().format() : '');
+        row.appendChild(inner);
+        host.appendChild(row);
+      }
+      document.write('<div id="builder-host" hidden></div>');
+      window.__builderHost = host;
+      var acc = 0;
+      for (var j = 0; j < 4200000; j++) { acc += Math.sqrt(j) * Math.sin(j); }
+      window.__acc = acc;
+    })();
+  </script>
+
+  <!-- Demo notice: this is a test site, not a real business -->
+  <div class="demo-flag" role="note">
+    <strong>Demo site</strong>A Reload Works test site for performance and accessibility testing. Not a real business.
+  </div>
+
+  <!-- Promotional announcement bar -->
+  <div class="promo">
+    <strong>Same-day local callouts available</strong><span class="sep">&bull;</span><span class="promo-tail">friendly, insured &amp; family-run</span>
+  </div>
+
+  <!-- Sticky navigation -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <div class="brand">
+          <a class="logo" href="#top">
+            <span class="logo-mark" aria-hidden="true">FR</span>
+            <span>Family Run Local Services<small>Repairs &bull; Maintenance &bull; Callouts</small></span>
+          </a>
+          <span class="demo-chip">Demo</span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a class="btn btn-primary nav-cta nav-desktop-cta" href="tel:02000000000">Call 020 0000 0000</a>
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <span class="eyebrow">Local trade specialists</span>
+            <h1>Reliable home repairs, done properly the first time</h1>
+            <p class="hero-lead">
+              Family-run specialists for repairs, fittings, maintenance, installations
+              and emergency callouts across the local area.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#contact">Request a free quote</a>
+              <a class="btn btn-outline" href="tel:02000000000">Call 020 0000 0000</a>
+            </div>
+            <ul class="trust-points">
+              <li><span class="tick" aria-hidden="true">&#10003;</span> Local &amp; insured</li>
+              <li><span class="tick" aria-hidden="true">&#10003;</span> Same-day availability</li>
+              <li><span class="tick" aria-hidden="true">&#10003;</span> No call-out fee</li>
+            </ul>
+          </div>
+
+          <div class="hero-media">
+            <!-- 19.5 MB PNG straight from the camera, no dimensions, lazy-loaded -->
+            <img
+              src="images/hero-original.png"
+              alt="Local tradesperson standing beside a company van outside a home"
+              loading="lazy">
+            <div class="hero-badge">
+              <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="score">4.9 / 5</span>
+              <span class="label">Rated by local customers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust bar -->
+        <div class="trust-bar">
+          <div class="trust-bar-grid">
+            <div class="stat"><strong>15+</strong><span>Years serving locally</span></div>
+            <div class="stat"><strong>2,500+</strong><span>Jobs completed</span></div>
+            <div class="stat"><strong>Same day</strong><span>Emergency callouts</span></div>
+            <div class="stat"><strong>12 month</strong><span>Workmanship guarantee</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">What we do</span>
+          <h2>Practical work, handled properly</h2>
+          <p>Dependable repairs and maintenance for homeowners, landlords and local businesses.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 2.6 2.6 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.7-.3-.3-1.7 2.3-2.3z"/>
+              </svg>
+            </div>
+            <h3>Home repairs</h3>
+            <p>General repairs, fixtures, fittings and the small jobs around the home that never get done.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>
+              </svg>
+            </div>
+            <h3>Property maintenance</h3>
+            <p>Reliable ongoing support and planned maintenance for landlords, homeowners and businesses.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>
+              </svg>
+            </div>
+            <h3>Emergency callouts</h3>
+            <p>Fast, same-day response for urgent issues when your home or business needs help now.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="about">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">About us</span>
+          <h2>A small local team you can actually get hold of</h2>
+          <p>
+            We provide practical, friendly and dependable local services. Our small
+            team handles everything from minor repairs to larger maintenance work,
+            always turning up on time and leaving the job tidy.
+          </p>
+          <ul class="about-list">
+            <li><span class="tick" aria-hidden="true">&#10003;</span> Clear, upfront quotes with no hidden costs</li>
+            <li><span class="tick" aria-hidden="true">&#10003;</span> Fully insured, vetted and DBS-checked team</li>
+            <li><span class="tick" aria-hidden="true">&#10003;</span> Workmanship you can rely on, guaranteed</li>
+          </ul>
+        </div>
+
+        <!-- Third-party embeds loaded on first paint -->
+        <div class="embeds">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" width="560" height="315" title="Promotional video"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.6!2d-0.1276!3d51.5074" width="560" height="315" title="Our location"></iframe>
+        </div>
+
+        <!-- Credentials panel -->
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <div class="big">4.9</div>
+              <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <p class="caption">Average rating across<br>hundreds of local jobs</p>
+          </div>
+          <dl class="panel-rows">
+            <div><dt>Public liability cover</dt><dd>&pound;5m</dd></div>
+            <div><dt>Workmanship guarantee</dt><dd>12 months</dd></div>
+            <div><dt>Typical quote response</dt><dd>Same day</dd></div>
+            <div><dt>Call-out fee</dt><dd>None</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Testimonials</span>
+          <h2>What customers say</h2>
+          <p>Rated 4.9 out of 5 across hundreds of local jobs.</p>
+        </div>
+        <div class="review-grid">
+          <figure class="review">
+            <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>&ldquo;Helpful, friendly and reliable. Would recommend to anyone locally.&rdquo;</p>
+            <figcaption class="who">Sarah M.<span>Homeowner, local area</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>&ldquo;Quick response and genuinely professional service from start to finish.&rdquo;</p>
+            <figcaption class="who">James T.<span>Landlord</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>&ldquo;Sorted the issue the same day. Tidy, fair priced and no fuss.&rdquo;</p>
+            <figcaption class="who">Priya K.<span>Business owner</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Quote CTA -->
+    <section class="quote" id="contact">
+      <div class="container">
+        <div class="quote-inner">
+          <div>
+            <span class="eyebrow on-dark">Get started</span>
+            <h2>Request a free, no-obligation quote</h2>
+            <p>
+              Tell us what you need and we&rsquo;ll get back to you the same day.
+              Prefer to talk? Call <strong>020 0000 0000</strong> or email
+              <a href="mailto:hello@example.com">hello@example.com</a>.
+            </p>
+          </div>
+          <form class="quote-form" action="#" method="post" aria-label="Request a quote">
+            <div class="field">
+              <label for="q-name">Your name</label>
+              <input id="q-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="q-phone">Phone</label>
+              <input id="q-phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="q-detail">What do you need?</label>
+              <input id="q-detail" name="detail" type="text" placeholder="e.g. leaking tap, boiler service">
+            </div>
+            <button class="btn btn-accent btn-block" type="submit">Request a quote</button>
+            <p class="form-note">No obligation. We never share your details.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#top">
+            <span class="logo-mark" aria-hidden="true">FR</span>
+            <span>Family Run Local Services<small>Repairs &bull; Maintenance &bull; Callouts</small></span>
+          </a>
+          <p>Trusted, family-run local trades for repairs, maintenance and emergency callouts.</p>
+        </div>
+        <nav aria-label="Services">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#services">Home repairs</a></li>
+            <li><a href="#services">Property maintenance</a></li>
+            <li><a href="#services">Emergency callouts</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Contact">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="tel:02000000000">020 0000 0000</a></li>
+            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+            <li><a href="#contact">Request a quote</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Family Run Local Services. All rights reserved.</span>
+        <span>Demo site for the Reload Works slow-website-demo project. Not a real business.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie notice: fixed position, so it can never contribute to CLS -->
+  <div class="cookie" id="cookie" role="region" aria-label="Cookie notice">
+    <span>This website uses cookies to improve your experience.</span>
+    <button class="btn btn-outline" id="cookieAccept" type="button">Accept</button>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Family Run Local Services",
+    "description": "Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.",
+    "telephone": "+442000000000",
+    "email": "hello@example.com",
+    "areaServed": "United Kingdom",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "312" }
+  }
+  </script>
+
+  <!--
+    Minimal essential JavaScript only:
+    1) Mobile menu toggle  - shows/hides nav links on small screens, keeps aria-expanded in sync.
+    2) Cookie banner accept - hides the banner when the user accepts.
+    No frameworks, no external libraries, nothing render-blocking.
+  -->
+  <script>
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      var host = document.getElementById('builder-host');
+      if (host && window.__builderHost) { host.appendChild(window.__builderHost); }
+
+      var cookie = document.getElementById('cookie');
+      document.getElementById('cookieAccept').addEventListener('click', function () {
+        cookie.hidden = true;
+      });
+    })();
+  </script>
+</body>
+</html>
