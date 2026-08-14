@@ -880,6 +880,30 @@
       object-fit: cover;
       border-radius: var(--r-lg);
     }
+
+    .hero-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--brand-deep);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .loader-spinner {
+      width: 38px;
+      height: 38px;
+      border: 4px solid rgba(11, 110, 79, 0.15);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: heroSpin 0.8s linear infinite;
+    }
+
+    @keyframes heroSpin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body><div style="background: rgb(255, 234, 0); color: rgb(17, 17, 17); font-size: 38px; font-weight: 800; line-height: 1.1; padding: 70px 24px; text-align: center;">EMERGENCY OFFER — Same-day appointments available</div>
@@ -947,7 +971,12 @@
 
           <div class="hero-media">
             <!-- DEMO ONLY: hero deliberately discovered late -->
-            <div id="slowHeroSlot" class="slow-hero-slot" aria-live="polite"><img src="https://slow-website-demo-5cwm0ry88-mulkimanel-7472s-projects.vercel.app/images/hero.webp?slow-demo=1786747559734" width="1200" height="800" alt="Local tradesperson standing beside a company van outside a home" decoding="async"></div>
+            <div id="slowHeroSlot" class="slow-hero-slot" aria-live="polite">
+              <div class="hero-loader">
+                <div class="loader-spinner" aria-hidden="true"></div>
+                <span>Loading image...</span>
+              </div>
+            </div>
             <div class="hero-badge">
               <span class="stars" aria-hidden="true">★★★★★</span>
               <span class="score">4.9 / 5</span>
