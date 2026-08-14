@@ -3,569 +3,680 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1F3D2B">
+  <meta name="theme-color" content="#0B6E4F">
   <meta name="description" content="Trusted local UK trades &amp; home services. Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.">
   <title>Family Run Local Services | Trusted UK Trades &amp; Home Repairs</title>
+  <link rel="canonical" href="https://mulkimanel-eng.github.io/slow-website-demo/">
   <link rel="preload" as="image" href="images/hero.webp" fetchpriority="high">
 
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Family Run Local Services | Trusted UK Trades &amp; Home Repairs">
+  <meta property="og:description" content="Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.">
+  <meta property="og:image" content="images/hero.webp">
+
   <style>
-    /* ---------- Design tokens ---------- */
+    /* ============================================================
+       Design tokens - refreshed identity
+       Emerald + neutral off-white. Amber is an accent only,
+       never a large surface. No gradients on primary controls.
+       ============================================================ */
     :root {
-      --green-dark: #1F3D2B;
-      --green-deep: #00502A;
-      --gold: #DCA94F;
-      --cream: #F6F3ED;
-      --ink: #21271f;
-      --muted: #5c6a5b;
-      --white: #ffffff;
-      --line: rgba(31, 61, 43, 0.12);
-      --radius: 16px;
-      --radius-sm: 12px;
-      --shadow-sm: 0 2px 8px rgba(31, 61, 43, 0.08);
-      --shadow-md: 0 12px 30px rgba(31, 61, 43, 0.12);
-      --shadow-lg: 0 24px 60px rgba(31, 61, 43, 0.18);
-      --container: 1200px;
+      /* Brand */
+      --brand:        #0B6E4F;
+      --brand-deep:   #07553D;
+      --brand-ink:    #0C1F19;
+      --brand-tint:   #EDF4F1;
+      --brand-tint-2: #DCEAE4;
+
+      /* Accent - used sparingly (ratings, eyebrow marks, one CTA) */
+      --accent:       #E4A11B;
+      --star:         #9A6100;   /* accessible gold for star glyphs on light surfaces */
+      --accent-ink:   #241804;
+
+      /* Neutrals */
+      --ink:          #101A16;
+      --muted:        #55635C;
+      --canvas:       #F6F7F6;
+      --surface:      #FFFFFF;
+      --line:         rgba(16, 26, 22, 0.11);
+      --line-strong:  rgba(16, 26, 22, 0.18);
+      --on-dark:      #E7EEEA;
+      --on-dark-mute: #A9BBB3;
+
+      /* Shape + depth (restrained) */
+      --r-sm: 10px;
+      --r:    14px;
+      --r-lg: 22px;
+      --shadow-xs: 0 1px 2px rgba(16, 26, 22, 0.05);
+      --shadow-sm: 0 2px 6px rgba(16, 26, 22, 0.06);
+      --shadow-md: 0 10px 28px rgba(16, 26, 22, 0.09);
+
+      --container: 1140px;
+      --gutter: 24px;
+
+      /* Fluid type scale */
+      --fs-display: clamp(2.25rem, 1.55rem + 2.7vw, 3.4rem);
+      --fs-h2:      clamp(1.7rem, 1.25rem + 1.8vw, 2.55rem);
+      --fs-h3:      clamp(1.1rem, 1.02rem + 0.35vw, 1.28rem);
+      --fs-lead:    clamp(1.03rem, 0.98rem + 0.3vw, 1.19rem);
+      --fs-body:    1rem;
+      --fs-sm:      0.9rem;
+      --fs-xs:      0.79rem;
     }
 
     /* ---------- Reset / base ---------- */
     *, *::before, *::after { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: var(--fs-body);
+      line-height: 1.62;
       color: var(--ink);
-      background:
-        radial-gradient(1100px 560px at 82% -12%, rgba(220, 169, 79, 0.10), transparent 60%),
-        radial-gradient(900px 480px at -8% 8%, rgba(0, 80, 42, 0.08), transparent 55%),
-        var(--cream);
-      line-height: 1.6;
+      background: var(--canvas);
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     img { max-width: 100%; display: block; }
-
     a { color: inherit; }
 
-    h1, h2, h3 { line-height: 1.12; margin: 0; color: var(--green-dark); letter-spacing: -0.015em; }
+    h1, h2, h3 {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.14;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+    h1 { font-size: var(--fs-display); line-height: 1.04; letter-spacing: -0.035em; }
+    h2 { font-size: var(--fs-h2); }
+    h3 { font-size: var(--fs-h3); letter-spacing: -0.015em; }
+    p  { margin: 0; }
 
-    p { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+
+    :focus-visible {
+      outline: 3px solid var(--brand);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
 
     .container {
       width: 100%;
       max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 24px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
     }
 
+    .measure { max-width: 60ch; }
+
+    /* ---------- Eyebrow ---------- */
     .eyebrow {
-      display: inline-block;
-      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-xs);
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--green-deep);
-      background: rgba(0, 80, 42, 0.08);
-      border: 1px solid rgba(0, 80, 42, 0.16);
-      padding: 6px 12px;
-      border-radius: 999px;
+      color: var(--brand-deep);
       margin-bottom: 14px;
     }
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .eyebrow.on-dark { color: var(--accent); }
 
-    /* ---------- Buttons ---------- */
+    /* ---------- Buttons: flat, solid, no gloss ---------- */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      min-height: 52px;
-      padding: 0 26px;
+      gap: 8px;
+      min-height: 50px;
+      padding: 0 24px;
       border: 1px solid transparent;
-      border-radius: 14px;
-      font-size: 16px;
-      font-weight: 700;
-      font-family: inherit;
+      border-radius: var(--r-sm);
+      font: inherit;
+      font-size: 0.97rem;
+      font-weight: 650;
+      letter-spacing: -0.005em;
       text-decoration: none;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      transition: background-color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
     }
-    .btn:active { transform: translateY(1px); }
-
-    /* glossy gold primary */
     .btn-primary {
-      color: #3a2a06;
-      border-color: rgba(120, 84, 20, 0.5);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 42%),
-        linear-gradient(180deg, #f0c877 0%, var(--gold) 48%, #c48f34 100%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 6px rgba(120, 84, 20, 0.3), var(--shadow-md);
+      background: var(--brand);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
     }
-    .btn-primary:hover { transform: translateY(-2px); filter: saturate(1.05) brightness(1.02); box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), inset 0 -2px 6px rgba(120,84,20,0.3), var(--shadow-lg); }
+    .btn-primary:hover { background: var(--brand-deep); transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
-    /* dark green gradient secondary */
-    .btn-secondary {
-      color: #eaf3ec;
-      border-color: rgba(0, 0, 0, 0.25);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 40%),
-        linear-gradient(180deg, #2c5740 0%, var(--green-dark) 55%, #12281b 100%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -2px 6px rgba(0, 0, 0, 0.22), var(--shadow-sm);
+    .btn-outline {
+      background: var(--surface);
+      color: var(--brand-deep);
+      border-color: var(--line-strong);
     }
-    .btn-secondary:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -2px 6px rgba(0,0,0,0.22), var(--shadow-md); }
+    .btn-outline:hover { border-color: var(--brand); background: var(--brand-tint); transform: translateY(-1px); }
 
-    .btn:focus-visible {
-      outline: 3px solid var(--green-deep);
-      outline-offset: 3px;
+    .btn-accent {
+      background: var(--accent);
+      color: var(--accent-ink);
     }
+    .btn-accent:hover { background: #f0ad25; transform: translateY(-1px); }
+
+    .btn:active { transform: translateY(0); }
+    .btn-block { width: 100%; }
 
     /* ---------- Promo bar ---------- */
     .promo {
-      background: linear-gradient(90deg, var(--green-deep), var(--green-dark));
-      color: #f2ead6;
+      background: var(--brand-ink);
+      color: var(--on-dark);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.02em;
       text-align: center;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 10px 16px;
+      padding: 9px var(--gutter);
     }
-    .promo strong { color: var(--gold); }
+    .promo strong { color: #fff; font-weight: 650; }
+    .promo .sep { color: var(--on-dark-mute); padding: 0 8px; }
 
-    /* ---------- Header / nav ---------- */
+    /* ---------- Header ---------- */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      padding-top: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: saturate(1.4) blur(10px);
+      -webkit-backdrop-filter: saturate(1.4) blur(10px);
+      border-bottom: 1px solid var(--line);
     }
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      padding: 12px 16px;
-      border-radius: 18px;
-      background: rgba(246, 243, 237, 0.72);
-      -webkit-backdrop-filter: blur(14px) saturate(1.4);
-      backdrop-filter: blur(14px) saturate(1.4);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: var(--shadow-md);
+      min-height: 72px;
     }
     .logo {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 18px;
-      color: var(--green-dark);
+      gap: 11px;
       text-decoration: none;
-      letter-spacing: -0.015em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.2;
     }
     .logo-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, #2c5740, var(--green-dark));
-      color: var(--gold);
       display: grid;
       place-items: center;
-      font-size: 18px;
-      font-weight: 800;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), var(--shadow-sm);
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
       flex: none;
     }
-    .logo small { display: block; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+    .logo small {
+      display: block;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 4px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
     }
     .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 0 16px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--green-dark);
+      display: inline-block;
+      padding: 11px 13px;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      font-weight: 550;
+      color: var(--muted);
       text-decoration: none;
-      transition: background 0.15s ease;
+      transition: color .15s ease, background-color .15s ease;
     }
-    .nav-links a:hover { background: rgba(0, 80, 42, 0.08); }
-    .nav-links a:focus-visible { outline: 3px solid var(--green-deep); outline-offset: 2px; }
+    .nav-links a:hover { color: var(--brand-deep); background: var(--brand-tint); }
 
     .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .nav-actions .btn { min-height: 46px; padding: 0 18px; font-size: 15px; }
+    .nav-cta { min-height: 44px; padding: 0 18px; font-size: 0.92rem; }
 
     .nav-toggle {
       display: none;
       width: 46px;
       height: 46px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.6);
+      padding: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: var(--surface);
       cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-sm);
     }
     .nav-toggle span,
     .nav-toggle span::before,
     .nav-toggle span::after {
-      content: "";
       display: block;
-      width: 20px;
+      width: 19px;
       height: 2px;
-      background: var(--green-dark);
+      margin-inline: auto;
+      background: var(--ink);
       border-radius: 2px;
-      position: relative;
+      content: "";
     }
-    .nav-toggle span::before { position: absolute; top: -6px; }
-    .nav-toggle span::after { position: absolute; top: 6px; }
+    .nav-toggle span::before { transform: translateY(-6px); }
+    .nav-toggle span::after  { transform: translateY(4px); }
 
     /* ---------- Hero ---------- */
-    .hero { padding: 48px 0 24px; }
+    .hero { padding: clamp(44px, 5vw, 84px) 0 clamp(32px, 3vw, 48px); }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr 1.05fr;
-      gap: 48px;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: clamp(28px, 4vw, 60px);
       align-items: center;
     }
-    .hero h1 {
-      font-size: clamp(36px, 5vw, 58px);
-      margin-bottom: 20px;
-      text-wrap: balance;
-    }
-    .hero h1 .accent { color: var(--green-deep); }
     .hero-lead {
-      font-size: 19px;
+      font-size: var(--fs-lead);
       color: var(--muted);
-      max-width: 46ch;
-      margin-bottom: 30px;
+      margin-top: 18px;
+      max-width: 52ch;
     }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 30px; }
-
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
     .trust-points {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+      gap: 8px 22px;
+      margin-top: 26px;
+      font-size: var(--fs-sm);
+      color: var(--muted);
     }
-    .trust-points li {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--green-dark);
-      background: rgba(255,255,255,0.65);
-      border: 1px solid var(--line);
-      padding: 8px 14px;
-      border-radius: 999px;
-      box-shadow: var(--shadow-sm);
-    }
+    .trust-points li { display: inline-flex; align-items: center; gap: 8px; }
+
     .tick {
+      display: grid;
+      place-items: center;
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: var(--green-deep);
-      color: var(--gold);
-      display: grid;
-      place-items: center;
-      font-size: 11px;
+      background: var(--brand-tint-2);
+      color: var(--brand-deep);
+      font-size: 10px;
+      font-weight: 700;
       flex: none;
     }
 
-    .hero-media {
-      position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid rgba(255,255,255,0.6);
-    }
+    .hero-media { position: relative; }
     .hero-media img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
     }
     .hero-badge {
       position: absolute;
       left: 18px;
       bottom: 18px;
-      background: rgba(246, 243, 237, 0.85);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 15px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-sm);
     }
-    .hero-badge strong { display: block; font-size: 22px; color: var(--green-deep); }
-    .hero-badge span { font-size: 13px; color: var(--muted); }
+    .hero-badge .score { font-size: 1.06rem; font-weight: 700; letter-spacing: -0.02em; }
+    .hero-badge .stars { color: var(--star); font-size: 0.8rem; letter-spacing: 1px; }
+    .hero-badge span.label { display: block; font-size: var(--fs-xs); color: var(--muted); }
 
-    /* ---------- Trust bar ---------- */
-    .trust-bar { margin-top: 26px; }
+    /* ---------- Trust bar: hairline rule, no card ---------- */
+    .trust-bar {
+      margin-top: clamp(36px, 4vw, 56px);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
     .trust-bar-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      padding: 22px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255,255,255,0.6);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
     }
-    .trust-bar-grid .stat strong { display: block; font-size: 28px; color: var(--green-deep); }
-    .trust-bar-grid .stat span { font-size: 13px; color: var(--muted); font-weight: 600; }
+    .stat {
+      padding: 24px 20px;
+      text-align: center;
+      border-left: 1px solid var(--line);
+    }
+    .stat:first-child { border-left: 0; }
+    .stat strong {
+      display: block;
+      font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.72rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--brand-deep);
+    }
+    .stat span { font-size: var(--fs-sm); color: var(--muted); }
 
     /* ---------- Sections ---------- */
-    .section { padding: 80px 0; }
-    .section-head { max-width: 640px; margin-bottom: 40px; }
-    .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-    .section-head h2 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 14px; text-wrap: balance; }
-    .section-head p { font-size: 18px; color: var(--muted); }
+    .section { padding: clamp(56px, 6.5vw, 96px) 0; }
+    .section-head { margin-bottom: clamp(28px, 3.5vw, 44px); max-width: 62ch; }
+    .section-head p { color: var(--muted); margin-top: 12px; font-size: var(--fs-lead); }
+    .section-head.center { margin-inline: auto; text-align: center; }
+    .section-head.center .eyebrow { justify-content: center; }
 
-    /* Services */
+    /* ---------- Service cards ---------- */
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
     .card {
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(255,255,255,0.65);
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: var(--shadow-sm);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 28px 26px 30px;
+      box-shadow: var(--shadow-xs);
+      transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .card:hover { border-color: var(--brand-tint-2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .card-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 13px;
-      background: linear-gradient(180deg, #fbf1dc, #f1dcae);
-      border: 1px solid rgba(200, 146, 60, 0.35);
       display: grid;
       place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--brand-tint);
+      color: var(--brand-deep);
       margin-bottom: 18px;
-      color: var(--green-deep);
     }
-    .card-icon svg { width: 26px; height: 26px; }
-    .card h3 { font-size: 21px; margin-bottom: 8px; }
-    .card p { color: var(--muted); font-size: 15px; }
+    .card-icon svg { width: 22px; height: 22px; }
+    .card h3 { margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: var(--fs-sm); }
 
-    /* About */
-    .about { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    /* ---------- About + credentials panel ---------- */
+    .about { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .split {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 56px;
+      gap: clamp(28px, 4.5vw, 64px);
       align-items: center;
     }
-    .about-media {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, #eef4ee, #dfe9e0);
-      aspect-ratio: 4 / 3;
-      display: grid;
-      place-items: center;
-      color: var(--green-deep);
-      padding: 24px;
-      text-align: center;
-    }
-    .about-media svg { width: 96px; height: 96px; opacity: 0.85; }
-    .about ul { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 14px; }
-    .about ul li { display: flex; gap: 12px; align-items: flex-start; font-weight: 500; }
-    .about ul .tick { margin-top: 3px; }
-    .about h2 { font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 16px; }
-    .about p { color: var(--muted); font-size: 17px; }
+    .about p { color: var(--muted); margin-top: 14px; }
+    .about-list { margin-top: 22px; display: grid; gap: 11px; }
+    .about-list li { display: flex; gap: 10px; align-items: flex-start; font-size: var(--fs-sm); color: var(--ink); }
 
-    /* Reviews */
-    .reviews { background: linear-gradient(180deg, var(--green-dark), #16301f); color: #eef3ee; }
-    .reviews .section-head h2 { color: var(--white); }
-    .reviews .section-head p { color: rgba(238, 243, 238, 0.72); }
-    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .review {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius);
+    .panel {
+      background: var(--brand-tint);
+      border: 1px solid var(--brand-tint-2);
+      border-radius: var(--r-lg);
       padding: 26px;
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
     }
-    .stars { color: var(--gold); font-size: 16px; letter-spacing: 2px; margin-bottom: 12px; }
-    .review p { font-size: 16px; line-height: 1.6; }
-    .review .who { margin-top: 16px; font-weight: 700; color: var(--white); font-size: 14px; }
-    .review .who span { display: block; font-weight: 500; color: rgba(238,243,238,0.6); }
+    .panel-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--brand-tint-2);
+    }
+    .panel-head .big {
+      font-size: clamp(2rem, 1.6rem + 1.4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      color: var(--brand-deep);
+      line-height: 1;
+    }
+    .panel-head .caption { font-size: var(--fs-sm); color: var(--muted); text-align: right; }
+    .panel-head .stars { color: var(--star); letter-spacing: 2px; }
 
-    /* Quote CTA */
-    .quote { padding: 84px 0; }
-    .quote-inner {
-      background:
-        radial-gradient(600px 300px at 92% -20%, rgba(220,169,79,0.28), transparent 60%),
-        linear-gradient(135deg, var(--green-deep), var(--green-dark));
-      border-radius: 26px;
-      padding: 56px;
-      color: #eef3ee;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 40px;
+    .panel-rows { margin-top: 6px; }
+    .panel-rows div {
+      display: flex;
       align-items: center;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid rgba(255,255,255,0.12);
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--brand-tint-2);
+      font-size: var(--fs-sm);
     }
-    .quote-inner h2 { color: var(--white); font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 14px; }
-    .quote-inner p { color: rgba(238, 243, 238, 0.8); font-size: 18px; }
-    .quote-inner p strong { color: var(--gold); }
+    .panel-rows div:last-child { border-bottom: 0; padding-bottom: 0; }
+    .panel-rows dt, .panel-rows .k { color: var(--muted); }
+    .panel-rows dd, .panel-rows .v { margin: 0; font-weight: 650; color: var(--brand-ink); }
+
+    /* ---------- Reviews (light tinted band) ---------- */
+    .reviews { background: var(--brand-tint); }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .review {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 26px;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .review .stars { color: var(--star); letter-spacing: 2px; font-size: 0.92rem; }
+    .review p { color: var(--ink); font-size: var(--fs-sm); }
+    .review .who {
+      margin: 0;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-weight: 650;
+      font-size: var(--fs-sm);
+    }
+    .review .who span { display: block; font-weight: 400; font-size: var(--fs-xs); color: var(--muted); }
+
+    /* ---------- Quote / CTA (the one dark section) ---------- */
+    .quote { padding: clamp(56px, 6.5vw, 96px) 0; }
+    .quote-inner {
+      background: var(--brand-ink);
+      color: var(--on-dark);
+      border-radius: var(--r-lg);
+      padding: clamp(30px, 4vw, 54px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 4vw, 52px);
+      align-items: center;
+    }
+    .quote-inner h2 { color: #fff; }
+    .quote-inner p { color: var(--on-dark-mute); margin-top: 14px; max-width: 44ch; }
+    .quote-inner p strong { color: #fff; }
+    .quote-inner a { color: var(--accent); }
+
     .quote-form {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 18px;
+      background: var(--surface);
+      border-radius: var(--r);
       padding: 24px;
       display: grid;
-      gap: 12px;
+      gap: 14px;
     }
-    .quote-form label { font-size: 13px; font-weight: 600; color: rgba(238,243,238,0.85); }
-    .quote-form input {
+    .field label {
+      display: block;
+      font-size: var(--fs-xs);
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .field input {
       width: 100%;
       min-height: 48px;
       padding: 0 14px;
-      border-radius: 11px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.95);
-      font-size: 15px;
-      font-family: inherit;
+      font: inherit;
+      font-size: 0.97rem;
       color: var(--ink);
+      background: var(--canvas);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-sm);
+      transition: border-color .15s ease, background-color .15s ease;
     }
-    .quote-form input:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
-    .quote-form .btn { width: 100%; margin-top: 6px; }
+    .field input::placeholder { color: #7d8a84; }
+    .field input:hover { border-color: var(--brand); }
+    .field input:focus { background: var(--surface); }
+    .quote-form .form-note { font-size: var(--fs-xs); color: var(--muted); text-align: center; margin-top: 2px; }
 
     /* ---------- Footer ---------- */
     .site-footer {
-      background: #10241a;
-      color: #cdd8ce;
-      padding: 56px 0 28px;
+      background: var(--brand-ink);
+      color: var(--on-dark-mute);
+      padding: clamp(44px, 5vw, 68px) 0 26px;
+      font-size: var(--fs-sm);
     }
+    .site-footer .logo { color: #fff; }
+    .site-footer .logo small { color: var(--on-dark-mute); }
+    .site-footer .logo-mark { background: var(--brand); }
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 36px;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: clamp(28px, 4vw, 56px);
     }
-    .footer-grid h4 { color: var(--white); font-size: 14px; margin: 0 0 14px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-    .footer-grid a { color: #cdd8ce; text-decoration: none; font-size: 15px; }
-    .footer-grid a:hover { color: var(--gold); }
-    .footer-brand .logo { color: var(--white); margin-bottom: 14px; }
-    .footer-brand .logo small { color: #9fb0a3; }
-    .footer-brand p { font-size: 15px; color: #9fb0a3; max-width: 34ch; }
+    .footer-brand p { margin-top: 16px; max-width: 40ch; }
+    .site-footer h3 {
+      color: #fff;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .site-footer nav a {
+      display: inline-block;
+      padding: 9px 0;
+      min-height: 40px;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      transition: color .15s ease;
+    }
+    .site-footer nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: clamp(32px, 4vw, 48px);
       padding-top: 22px;
-      font-size: 13px;
-      color: #8fa295;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 10px 24px;
+      justify-content: space-between;
+      font-size: var(--fs-xs);
     }
 
-    /* ---------- Cookie banner ---------- */
+    /* ---------- Cookie notice (fixed: cannot shift layout) ---------- */
     .cookie {
       position: fixed;
       left: 16px;
       right: 16px;
       bottom: 16px;
       z-index: 60;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      padding: 16px 20px;
+      margin-inline: auto;
+      max-width: 560px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      max-width: 720px;
-      margin: 0 auto;
-      font-size: 14px;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r);
+      box-shadow: var(--shadow-md);
+      font-size: var(--fs-sm);
     }
     .cookie[hidden] { display: none; }
-    .cookie .btn { min-height: 44px; padding: 0 20px; font-size: 15px; }
+    .cookie .btn { min-height: 44px; padding: 0 20px; font-size: 0.9rem; }
 
-    /* ---------- Responsive ---------- */
-    @media (max-width: 900px) {
-      .hero-grid, .split, .quote-inner { grid-template-columns: 1fr; }
-      .cards, .review-grid { grid-template-columns: 1fr; }
-      .trust-bar-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .hero { padding: 32px 0; }
+    /* ============================================================
+       Responsive
+       ============================================================ */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
       .hero-media { order: -1; }
-      .quote-inner { padding: 32px; }
+      .split { grid-template-columns: 1fr; }
+      .quote-inner { grid-template-columns: 1fr; }
+      .cards, .review-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
 
-      .nav-toggle { display: inline-flex; }
+    @media (max-width: 780px) {
+      :root { --gutter: 18px; }
+
+      .nav-toggle { display: block; }
+      .nav-desktop-cta { display: none; }
       .nav-links {
         position: absolute;
-        top: calc(100% + 8px);
-        left: 24px;
-        right: 24px;
+        left: 0;
+        right: 0;
+        top: 100%;
+        display: none;
         flex-direction: column;
         align-items: stretch;
-        gap: 4px;
-        background: rgba(246, 243, 237, 0.96);
-        -webkit-backdrop-filter: blur(14px);
-        backdrop-filter: blur(14px);
-        border: 1px solid rgba(255,255,255,0.6);
-        border-radius: var(--radius);
-        padding: 10px;
-        box-shadow: var(--shadow-lg);
-        display: none;
+        gap: 2px;
+        padding: 10px var(--gutter) 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow-md);
       }
       .nav-links.open { display: flex; }
-      .nav-links a { min-height: 48px; padding: 0 14px; }
-      .nav-desktop-call { display: none; }
+      .nav-links a { padding: 14px 12px; font-size: 1rem; }
+      .site-header .container { position: relative; }
+
+      .trust-bar-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(odd) { border-left: 0; }
+      .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+
+      .cards, .review-grid { grid-template-columns: 1fr; }
+      .hero-cta .btn { flex: 1 1 auto; }
     }
 
     @media (max-width: 520px) {
-      .trust-bar-grid, .footer-grid { grid-template-columns: 1fr; }
-      .cookie { flex-direction: column; align-items: stretch; text-align: center; }
-      .section { padding: 56px 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; scroll-behavior: auto !important; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-badge { left: 12px; bottom: 12px; padding: 9px 12px; }
+      .promo .sep { display: none; }
+      .promo .promo-tail { display: block; }
     }
   </style>
 </head>
-
 <body>
   <!-- Promotional announcement bar -->
   <div class="promo">
-    <strong>Same-day local callouts available</strong> &nbsp;&mdash;&nbsp; friendly, insured &amp; family-run
+    <strong>Same-day local callouts available</strong><span class="sep">&mdash;</span><span class="promo-tail">friendly, insured &amp; family-run</span>
   </div>
 
-  <!-- Sticky glass navigation -->
+  <!-- Sticky navigation -->
   <header class="site-header">
     <div class="container">
       <nav class="nav" aria-label="Primary">
         <a class="logo" href="#top">
           <span class="logo-mark" aria-hidden="true">FR</span>
-          <span>Family Run Local Services<small>Repairs • Maintenance • Callouts</small></span>
+          <span>Family Run Local Services<small>Repairs &bull; Maintenance &bull; Callouts</small></span>
         </a>
 
         <ul class="nav-links" id="navLinks">
@@ -576,7 +687,7 @@
         </ul>
 
         <div class="nav-actions">
-          <a class="btn btn-primary nav-desktop-call" href="tel:02000000000">Call 020 0000 0000</a>
+          <a class="btn btn-primary nav-cta nav-desktop-cta" href="tel:02000000000">Call 020 0000 0000</a>
           <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <span></span>
           </button>
@@ -592,19 +703,19 @@
         <div class="hero-grid">
           <div class="hero-text">
             <span class="eyebrow">Local trade specialists</span>
-            <h1>Reliable home repairs &amp; <span class="accent">trusted local services</span></h1>
+            <h1>Reliable home repairs, done properly the first time</h1>
             <p class="hero-lead">
               Family-run specialists for repairs, fittings, maintenance, installations
-              and emergency callouts &mdash; done properly, first time.
+              and emergency callouts across the local area.
             </p>
             <div class="hero-cta">
-              <a class="btn btn-primary" href="#contact">Request a Quote</a>
-              <a class="btn btn-secondary" href="tel:02000000000">Call Now</a>
+              <a class="btn btn-primary" href="#contact">Request a free quote</a>
+              <a class="btn btn-outline" href="tel:02000000000">Call 020 0000 0000</a>
             </div>
             <ul class="trust-points">
               <li><span class="tick" aria-hidden="true">&#10003;</span> Local &amp; insured</li>
               <li><span class="tick" aria-hidden="true">&#10003;</span> Same-day availability</li>
-              <li><span class="tick" aria-hidden="true">&#10003;</span> Rated by customers</li>
+              <li><span class="tick" aria-hidden="true">&#10003;</span> No call-out fee</li>
             </ul>
           </div>
 
@@ -612,22 +723,25 @@
             <img
               src="images/hero.webp"
               width="1200" height="800"
-              alt="Local tradesperson completing a home repair"
+              alt="Local tradesperson standing beside a company van outside a home"
               fetchpriority="high" decoding="async">
             <div class="hero-badge">
-              <strong>4.9 / 5</strong>
-              <span>Rated by local customers</span>
+              <div>
+                <span class="score">4.9 / 5</span>
+                <span class="label">Rated by local customers</span>
+              </div>
+              <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
             </div>
           </div>
         </div>
 
         <!-- Trust bar -->
-        <div class="trust-bar" aria-label="Company highlights">
+        <div class="trust-bar">
           <div class="trust-bar-grid">
             <div class="stat"><strong>15+</strong><span>Years serving locally</span></div>
             <div class="stat"><strong>2,500+</strong><span>Jobs completed</span></div>
             <div class="stat"><strong>Same day</strong><span>Emergency callouts</span></div>
-            <div class="stat"><strong>Fully</strong><span>Insured &amp; vetted</span></div>
+            <div class="stat"><strong>12 month</strong><span>Workmanship guarantee</span></div>
           </div>
         </div>
       </div>
@@ -638,13 +752,13 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">What we do</span>
-          <h2>Our services</h2>
-          <p>Practical, dependable work for homeowners, landlords and local businesses.</p>
+          <h2>Practical work, handled properly</h2>
+          <p>Dependable repairs and maintenance for homeowners, landlords and local businesses.</p>
         </div>
         <div class="cards">
           <article class="card">
             <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 2.6 2.6 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.7-.3-.3-1.7 2.3-2.3z"/>
               </svg>
             </div>
@@ -653,7 +767,7 @@
           </article>
           <article class="card">
             <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>
               </svg>
             </div>
@@ -662,7 +776,7 @@
           </article>
           <article class="card">
             <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>
               </svg>
             </div>
@@ -676,24 +790,36 @@
     <!-- About -->
     <section class="section about" id="about">
       <div class="container split">
-        <div class="about-media" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 21s-7-4.35-7-10a7 7 0 0 1 14 0c0 5.65-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/>
-          </svg>
-        </div>
         <div>
           <span class="eyebrow">About us</span>
-          <h2>Serving the local community for years</h2>
+          <h2>A small local team you can actually get hold of</h2>
           <p>
             We provide practical, friendly and dependable local services. Our small
             team handles everything from minor repairs to larger maintenance work,
             always turning up on time and leaving the job tidy.
           </p>
-          <ul>
+          <ul class="about-list">
             <li><span class="tick" aria-hidden="true">&#10003;</span> Clear, upfront quotes with no hidden costs</li>
             <li><span class="tick" aria-hidden="true">&#10003;</span> Fully insured, vetted and DBS-checked team</li>
             <li><span class="tick" aria-hidden="true">&#10003;</span> Workmanship you can rely on, guaranteed</li>
           </ul>
+        </div>
+
+        <!-- Credentials panel (replaces the empty placeholder box) -->
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <div class="big">4.9</div>
+              <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <p class="caption">Average rating across<br>hundreds of local jobs</p>
+          </div>
+          <dl class="panel-rows">
+            <div><dt>Public liability cover</dt><dd>&pound;5m</dd></div>
+            <div><dt>Workmanship guarantee</dt><dd>12 months</dd></div>
+            <div><dt>Typical quote response</dt><dd>Same day</dd></div>
+            <div><dt>Call-out fee</dt><dd>None</dd></div>
+          </dl>
         </div>
       </div>
     </section>
@@ -702,25 +828,25 @@
     <section class="section reviews" id="reviews">
       <div class="container">
         <div class="section-head center">
-          <span class="eyebrow" style="color:var(--gold);background:rgba(220,169,79,0.12);border-color:rgba(220,169,79,0.3)">Testimonials</span>
+          <span class="eyebrow">Testimonials</span>
           <h2>What customers say</h2>
           <p>Rated 4.9 out of 5 across hundreds of local jobs.</p>
         </div>
         <div class="review-grid">
           <figure class="review">
-            <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p>&ldquo;Helpful, friendly and reliable. Would recommend to anyone locally.&rdquo;</p>
-            <figcaption class="who">Sarah M.<span>Homeowner, Local Area</span></figcaption>
+            <figcaption class="who">Sarah M.<span>Homeowner, local area</span></figcaption>
           </figure>
           <figure class="review">
-            <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p>&ldquo;Quick response and genuinely professional service from start to finish.&rdquo;</p>
             <figcaption class="who">James T.<span>Landlord</span></figcaption>
           </figure>
           <figure class="review">
-            <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p>&ldquo;Sorted the issue the same day. Tidy, fair priced and no fuss.&rdquo;</p>
-            <figcaption class="who">Priya K.<span>Business Owner</span></figcaption>
+            <figcaption class="who">Priya K.<span>Business owner</span></figcaption>
           </figure>
         </div>
       </div>
@@ -731,24 +857,29 @@
       <div class="container">
         <div class="quote-inner">
           <div>
-            <span class="eyebrow" style="color:var(--gold);background:rgba(220,169,79,0.14);border-color:rgba(220,169,79,0.3)">Get started</span>
+            <span class="eyebrow on-dark">Get started</span>
             <h2>Request a free, no-obligation quote</h2>
-            <p>Tell us what you need and we&rsquo;ll get back to you the same day. Prefer to talk? Call <strong>020 0000 0000</strong> or email hello@example.com.</p>
+            <p>
+              Tell us what you need and we&rsquo;ll get back to you the same day.
+              Prefer to talk? Call <strong>020 0000 0000</strong> or email
+              <a href="mailto:hello@example.com">hello@example.com</a>.
+            </p>
           </div>
           <form class="quote-form" action="#" method="post" aria-label="Request a quote">
-            <div>
+            <div class="field">
               <label for="q-name">Your name</label>
               <input id="q-name" name="name" type="text" autocomplete="name" required>
             </div>
-            <div>
+            <div class="field">
               <label for="q-phone">Phone</label>
               <input id="q-phone" name="phone" type="tel" autocomplete="tel" required>
             </div>
-            <div>
+            <div class="field">
               <label for="q-detail">What do you need?</label>
               <input id="q-detail" name="detail" type="text" placeholder="e.g. leaking tap, boiler service">
             </div>
-            <button class="btn btn-primary" type="submit">Request a Quote</button>
+            <button class="btn btn-accent btn-block" type="submit">Request a quote</button>
+            <p class="form-note">No obligation. We never share your details.</p>
           </form>
         </div>
       </div>
@@ -762,26 +893,26 @@
         <div class="footer-brand">
           <a class="logo" href="#top">
             <span class="logo-mark" aria-hidden="true">FR</span>
-            <span>Family Run Local Services<small>Repairs • Maintenance • Callouts</small></span>
+            <span>Family Run Local Services<small>Repairs &bull; Maintenance &bull; Callouts</small></span>
           </a>
           <p>Trusted, family-run local trades for repairs, maintenance and emergency callouts.</p>
         </div>
-        <div>
-          <h4>Services</h4>
+        <nav aria-label="Services">
+          <h3>Services</h3>
           <ul>
             <li><a href="#services">Home repairs</a></li>
             <li><a href="#services">Property maintenance</a></li>
             <li><a href="#services">Emergency callouts</a></li>
           </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
+        </nav>
+        <nav aria-label="Contact">
+          <h3>Contact</h3>
           <ul>
             <li><a href="tel:02000000000">020 0000 0000</a></li>
             <li><a href="mailto:hello@example.com">hello@example.com</a></li>
             <li><a href="#contact">Request a quote</a></li>
           </ul>
-        </div>
+        </nav>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Family Run Local Services. All rights reserved.</span>
@@ -790,15 +921,28 @@
     </div>
   </footer>
 
-  <!-- Cookie banner -->
+  <!-- Cookie notice: fixed position, so it can never contribute to CLS -->
   <div class="cookie" id="cookie" role="region" aria-label="Cookie notice">
     <span>This website uses cookies to improve your experience.</span>
-    <button class="btn btn-secondary" id="cookieAccept" type="button">Accept</button>
+    <button class="btn btn-outline" id="cookieAccept" type="button">Accept</button>
   </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Family Run Local Services",
+    "description": "Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.",
+    "telephone": "+442000000000",
+    "email": "hello@example.com",
+    "areaServed": "United Kingdom",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "312" }
+  }
+  </script>
 
   <!--
     Minimal essential JavaScript only:
-    1) Mobile menu toggle  - shows/hides nav links on small screens and keeps aria-expanded in sync.
+    1) Mobile menu toggle  - shows/hides nav links on small screens, keeps aria-expanded in sync.
     2) Cookie banner accept - hides the banner when the user accepts.
     No frameworks, no external libraries, nothing render-blocking.
   -->
