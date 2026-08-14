@@ -7,12 +7,21 @@
   <meta name="description" content="Trusted local UK trades &amp; home services. Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.">
   <title>Family Run Local Services | Trusted UK Trades &amp; Home Repairs</title>
   <link rel="canonical" href="https://mulkimanel-eng.github.io/slow-website-demo/">
-  <link rel="preload" as="image" href="images/hero.webp" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Family Run Local Services | Trusted UK Trades &amp; Home Repairs">
   <meta property="og:description" content="Family-run specialists for repairs, maintenance, installations and same-day emergency callouts.">
   <meta property="og:image" content="images/hero.webp">
+
+  <!-- ============================================================
+       DEMO ONLY — intentionally unnecessary render-blocking resources
+       These are included purely to create a poor Lighthouse baseline.
+       ============================================================ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
   <style>
     /* ============================================================
@@ -707,6 +716,31 @@
       .promo .sep { display: none; }
       .promo .promo-tail { display: block; }
     }
+
+
+    /* ============================================================
+       DEMO ONLY — deliberately poor hero loading
+       The real hero image is inserted by JavaScript after 10 seconds.
+       ============================================================ */
+    .slow-hero-slot {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      display: grid;
+      place-items: center;
+      background: #e5e5e5;
+      color: #777;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      font-size: 0.9rem;
+    }
+
+    .slow-hero-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--r-lg);
+    }
   </style>
 </head>
 <body>
@@ -773,11 +807,10 @@
           </div>
 
           <div class="hero-media">
-            <img
-              src="images/hero.webp"
-              width="1200" height="800"
-              alt="Local tradesperson standing beside a company van outside a home"
-              fetchpriority="high" decoding="async">
+            <!-- DEMO ONLY: hero deliberately discovered late -->
+            <div id="slowHeroSlot" class="slow-hero-slot" aria-live="polite">
+              <span>Loading image...</span>
+            </div>
             <div class="hero-badge">
               <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
               <span class="score">4.9 / 5</span>
@@ -1017,6 +1050,78 @@
         cookie.hidden = true;
       });
     })();
+  </script>
+
+
+  <!-- ============================================================
+       DEMO SLOW MODE
+       Deliberately introduces realistic performance problems for
+       visual demonstrations and Google Lighthouse/PageSpeed testing.
+       Remove this whole block to restore normal behaviour.
+       ============================================================ -->
+  <script>
+    /* PROBLEM 1 — Late hero discovery: hurts LCP. */
+    setTimeout(function () {
+      var slot = document.getElementById('slowHeroSlot');
+      if (!slot) return;
+
+      var img = document.createElement('img');
+      img.src = 'images/hero.webp?slow-demo=' + Date.now();
+      img.width = 1200;
+      img.height = 800;
+      img.alt = 'Local tradesperson standing beside a company van outside a home';
+      img.decoding = 'async';
+
+      slot.innerHTML = '';
+      slot.appendChild(img);
+    }, 10000);
+
+    /* PROBLEM 2 — Long main-thread task: hurts TBT/responsiveness. */
+    setTimeout(function () {
+      var start = performance.now();
+      while (performance.now() - start < 5000) {
+        Math.sqrt(Math.random() * 999999);
+      }
+    }, 1500);
+
+    /* PROBLEM 3 — Late banner insertion: creates a large layout shift. */
+    setTimeout(function () {
+      var banner = document.createElement('div');
+      banner.textContent = 'EMERGENCY OFFER — Same-day appointments available';
+      banner.style.cssText = [
+        'background:#ffea00',
+        'color:#111',
+        'font-size:38px',
+        'font-weight:800',
+        'line-height:1.1',
+        'padding:70px 24px',
+        'text-align:center'
+      ].join(';');
+      document.body.prepend(banner);
+    }, 3500);
+
+    /* PROBLEM 4 — Excessive hidden DOM: creates unnecessary browser work. */
+    var junkContainer = document.createElement('div');
+    junkContainer.style.display = 'none';
+    junkContainer.id = 'demo-dom-bloat';
+
+    for (var i = 0; i < 2000; i++) {
+      var wrapper = document.createElement('div');
+      wrapper.innerHTML = `
+        <div class="builder-section">
+          <div class="builder-container">
+            <div class="builder-row">
+              <div class="builder-column">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      junkContainer.appendChild(wrapper);
+    }
+
+    document.body.appendChild(junkContainer);
   </script>
 </body>
 </html>
